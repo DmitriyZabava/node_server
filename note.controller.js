@@ -14,7 +14,7 @@ async function addNotes(title) {
     };
     notes.push(note);
 
-    await saveNotes(notes)
+    await saveNotes(notes);
     console.log(chalk.bgBlueBright("Note was added!"));
 }
 
@@ -25,7 +25,7 @@ async function getNotes() {
 }
 
 async function saveNotes(notes) {
-    await fs.writeFile(notesPath, JSON.stringify(notes))
+    await fs.writeFile(notesPath, JSON.stringify(notes));
 }
 
 
@@ -34,22 +34,23 @@ async function removeNotes(id) {
     const strId = String(id);
     const filteredNotes = notes.filter((note) => note.id !== strId);
 
-    await saveNotes(filteredNotes)
+    await saveNotes(filteredNotes);
     console.log(chalk.red(`Notes ${id} deleted`));
 }
 
-async function editNotes(id,title) {
-    const strId = String(id);
-    const notes =await  getNotes();
-    notes.map((note)=>{
-        if(note.id===strId){
-            note.title=title
+async function editNotes(id, title) {
+
+    const notes = await getNotes();
+    notes.map((note) => {
+        if(note.id === id) {
+            note.title = title;
         }
-    })
-    await saveNotes(notes)
+    });
+    await saveNotes(notes);
 
 
 }
+
 async function printNotes() {
     const notes = await getNotes();
 
@@ -60,5 +61,5 @@ async function printNotes() {
 }
 
 module.exports = {
-    addNotes, removeNotes, getNotes,editNotes
+    addNotes, removeNotes, getNotes, editNotes
 };
