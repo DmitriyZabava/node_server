@@ -42,7 +42,7 @@ async function editNotes(id,title) {
     const strId = String(id);
     const notes =await  getNotes();
     notes.map((note)=>{
-        if(note.id===id){
+        if(note.id===strId){
             note.title=title
         }
     })
